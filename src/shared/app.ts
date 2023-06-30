@@ -3,7 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
 
-import { router } from "src/routes";
+import { router } from "@routes/index";
 
 dotenv.config();
 

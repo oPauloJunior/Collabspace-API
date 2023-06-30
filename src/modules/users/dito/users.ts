@@ -23,7 +23,7 @@ interface ICreateUser {
   id: string;
   name: string;
   email: string;
-  telephone?: string;
+  telephone?: string | null;
   birthDate: string;
   password: string;
   avatarUrl?: string;
