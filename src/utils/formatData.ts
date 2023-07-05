@@ -1,11 +1,11 @@
-function telephoneFormat(telephone: string | null): string | null {
+function telephoneFormat(telephone: string | null): string | undefined {
   return telephone
     ? telephone
         .replaceAll("(", "")
         .replaceAll(")", "")
         .replaceAll(" ", "")
         .replaceAll("-", "")
-    : null;
+    : undefined;
 }
 
 export { telephoneFormat };

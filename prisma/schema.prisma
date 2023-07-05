@@ -7,35 +7,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model comnets {
+model comments {
   id           String   @id @db.Uuid
   post_id      String   @db.Uuid
   user_id      String   @db.Uuid
-  comnent      String   @db.VarChar
+  content      String   @db.VarChar
   commented_at DateTime @default(now()) @db.Timestamp(6)
   posts        posts    @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   users        users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model frinds {
-  id                            String @id @db.Uuid
-  user_id_1                     String @db.Uuid
-  user_id_2                     String @db.Uuid
-  action_id_1                   Int?   @db.SmallInt
-  action_id_2                   Int?   @db.SmallInt
-  users_frinds_user_id_1Tousers users  @relation("frinds_user_id_1Tousers", fields: [user_id_1], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  users_frinds_user_id_2Tousers users  @relation("frinds_user_id_2Tousers", fields: [user_id_2], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model friends {
+  id                             String   @id @db.Uuid
+  user_id_1                      String   @db.Uuid
+  user_id_2                      String   @db.Uuid
+  action_id_1                    Int?     @db.SmallInt
+  action_id_2                    Int?     @db.SmallInt
+  created_at                     DateTime @default(now()) @db.Timestamp(6)
+  users_friends_user_id_1Tousers users    @relation("friends_user_id_1Tousers", fields: [user_id_1], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users_friends_user_id_2Tousers users    @relation("friends_user_id_2Tousers", fields: [user_id_2], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model posts {
-  id           String    @id @db.Uuid
-  user_id      String    @db.Uuid
-  content      String    @db.VarChar
-  tags         String?   @db.VarChar
-  visibility   Int?      @default(0) @db.SmallInt
-  publeshed_at DateTime  @default(now()) @db.Timestamp(6)
-  comnets      comnets[]
-  users        users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id           String     @id @db.Uuid
+  user_id      String     @db.Uuid
+  content      String     @db.VarChar
+  tags         String?    @db.VarChar
+  visibility   Int?       @default(0) @db.SmallInt
+  published_at DateTime   @default(now()) @db.Timestamp(6)
+  comments     comments[]
+  users        users      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model reactions {
@@ -48,17 +49,17 @@ model reactions {
 }
 
 model users {
-  id                             String      @id @db.Uuid
-  name                           String      @db.VarChar
-  email                          String      @unique @db.VarChar
-  telephone                      String?     @db.VarChar
-  birth_date                     String      @db.VarChar
-  password                       String      @db.VarChar
-  avatar_url                     String?     @db.VarChar
-  created_at                     DateTime    @default(now()) @db.Timestamp(6)
-  comnets                        comnets[]
-  frinds_frinds_user_id_1Tousers frinds[]    @relation("frinds_user_id_1Tousers")
-  frinds_frinds_user_id_2Tousers frinds[]    @relation("frinds_user_id_2Tousers")
-  posts                          posts[]
-  reactions                      reactions[]
+  id                               String      @id @db.Uuid
+  name                             String      @db.VarChar
+  email                            String      @unique @db.VarChar
+  telephone                        String?     @db.VarChar
+  birth_date                       String      @db.VarChar
+  password                         String      @db.VarChar
+  avatar_url                       String?     @db.VarChar
+  created_at                       DateTime    @default(now()) @db.Timestamp(6)
+  comments                         comments[]
+  friends_friends_user_id_1Tousers friends[]   @relation("friends_user_id_1Tousers")
+  friends_friends_user_id_2Tousers friends[]   @relation("friends_user_id_2Tousers")
+  posts                            posts[]
+  reactions                        reactions[]
 }

@@ -1,16 +1,23 @@
-import { v4 } from "uuid";
+import { inject, injectable } from "tsyringe";
 
-import { encryptPassword } from "@utils/bcrypt";
-import { IRequestCreateUser } from "@modules/users/dito/users";
-import { UserRepository } from "@modules/users/repositories/UserRepository";
+import { IRequestCreateUser } from "@modules/users/dto/users";
 import { telephoneFormat } from "@utils/formatData";
+import { AppResponse } from "@helpers/responseParser";
+import { AppError } from "@helpers/errorsHandler";
+import { IUsersRepositories } from "@modules/users/iRepositories/iUsersRepositories";
+import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
+import { IBcryptProvider } from "@shared/container/providers/bcryptProvider/IBcryptProvider";
 
+@injectable()
 class CreateUserUseCase {
-  private userRepository: UserRepository;
-
-  constructor(userRepository = new UserRepository()) {
-    this.userRepository = userRepository;
-  }
+  constructor(
+    @inject("UserRepository")
+    private userRepository: IUsersRepositories,
+    @inject("UuidProvider")
+    private uuidProvider: IUuidProvider,
+    @inject("BcryptProvider")
+    private bcryptProvider: IBcryptProvider
+  ) {}
 
   async execute({
     name,
@@ -20,35 +27,41 @@ class CreateUserUseCase {
     confirmPassword,
     telephone,
     birthDate,
-  }: IRequestCreateUser): Promise<any> {
+  }: IRequestCreateUser): Promise<AppResponse> {
     if (password !== confirmPassword) {
-      return { message: "As senhas nao coindicem!" };
+      throw new AppError({
+        message: "As senhas não coincidem!",
+      });
     }
-
-    console.log(password);
 
     if (
       !password.match(
         /(?=^.{8,}$)((?=.*\d)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/
       )
     ) {
-      return { message: "Senha fraca!" };
+      throw new AppError({
+        message: "Senha Fraca!",
+      });
     }
 
     if (email !== confirmEmail) {
-      return { message: "As senhas nao coindicem!" };
+      throw new AppError({
+        message: "Os e-mails não coincidem!",
+      });
     }
 
-    const listUserByEmail = await this.userRepository.listByemail(email);
+    const listUserByEmail = await this.userRepository.listByEmail(email);
 
     if (listUserByEmail) {
-      return { message: "Usuaio ja cadastrado" };
+      throw new AppError({
+        message: "Usúario já cadastrado!",
+      });
     }
 
-    const passwordHash = await encryptPassword(password);
+    const passwordHash = await this.bcryptProvider.encryptPassword(password);
 
-    const craateUser = await this.userRepository.create({
-      id: v4(),
+    const createUser = await this.userRepository.create({
+      id: this.uuidProvider.createUUID(),
       name,
       email,
       telephone: telephoneFormat(telephone),
@@ -56,7 +69,17 @@ class CreateUserUseCase {
       password: passwordHash.hash,
     });
 
-    return { craateUser };
+    return new AppResponse({
+      statusCode: 201,
+      message: "Usuário criado com sucesso!",
+      data: {
+        id: createUser.id,
+        name: createUser.name,
+        email: createUser.email,
+        telephone: createUser.telephone,
+        birthDate: createUser.birth_date,
+      },
+    });
   }
 }
 

@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Ctech12\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add tsx @types/nodes tsup -D
+  C:\Program Files\nodejs\node.exe C:\Users\Ctech13\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add tsx @types/nodes tsup -D
 
 PATH: 
-  C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Users\Ctech12\AppData\Local\Microsoft\WindowsApps;;C:\Users\Ctech12\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Ctech12\AppData\Roaming\npm
+  C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Users\Ctech13\AppData\Local\Microsoft\WindowsApps;;C:\Users\Ctech13\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Ctech13\AppData\Roaming\npm
 
 Yarn version: 
   1.22.19
@@ -15,12 +15,12 @@ Platform:
 
 Trace: 
   Error: https://registry.yarnpkg.com/@types%2fnodes: Not found
-      at params.callback [as _callback] (C:\Users\Ctech12\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66145:18)
-      at self.callback (C:\Users\Ctech12\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140890:22)
+      at params.callback [as _callback] (C:\Users\Ctech13\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66145:18)
+      at self.callback (C:\Users\Ctech13\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140890:22)
       at Request.emit (node:events:513:28)
-      at Request.<anonymous> (C:\Users\Ctech12\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141862:10)
+      at Request.<anonymous> (C:\Users\Ctech13\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141862:10)
       at Request.emit (node:events:513:28)
-      at IncomingMessage.<anonymous> (C:\Users\Ctech12\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141784:12)
+      at IncomingMessage.<anonymous> (C:\Users\Ctech13\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141784:12)
       at Object.onceWrapper (node:events:627:28)
       at IncomingMessage.emit (node:events:525:35)
       at endReadableNT (node:internal/streams/readable:1359:12)
@@ -35,14 +35,6 @@ npm manifest:
     "devDependencies": {
       "@types/cors": "^2.8.13",
       "@types/express": "^4.17.17",
-      "@typescript-eslint/eslint-plugin": "^5.50.0",
-      "eslint": "^8.43.0",
-      "eslint-config-prettier": "^8.8.0",
-      "eslint-config-standard-with-typescript": "^35.0.0",
-      "eslint-plugin-import": "^2.25.2",
-      "eslint-plugin-n": "^15.0.0",
-      "eslint-plugin-prettier": "^4.2.1",
-      "eslint-plugin-promise": "^6.0.0",
       "prettier": "^2.8.8",
       "ts-node-dev": "^2.0.0",
       "typescript": "*"
