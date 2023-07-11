@@ -33,7 +33,7 @@ model posts {
   user_id      String     @db.Uuid
   content      String     @db.VarChar
   tags         String?    @db.VarChar
-  visibility   Int?       @default(0) @db.SmallInt
+  visibility   Int       @default(0) @db.SmallInt
   published_at DateTime   @default(now()) @db.Timestamp(6)
   comments     comments[]
   users        users      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -56,6 +56,7 @@ model users {
   birth_date                       String      @db.VarChar
   password                         String      @db.VarChar
   avatar_url                       String?     @db.VarChar
+  active                           Boolean    @default(true)
   created_at                       DateTime    @default(now()) @db.Timestamp(6)
   comments                         comments[]
   friends_friends_user_id_1Tousers friends[]   @relation("friends_user_id_1Tousers")

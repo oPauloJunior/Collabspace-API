@@ -6,4 +6,5 @@ import { IBcryptProvider } from "./bcryptProvider/IBcryptProvider";
 import { BcryptProvider } from "./bcryptProvider/implementation/BcryptProvider";
 
 container.registerSingleton<IUuidProvider>("UuidProvider", UuidProvider);
+
 container.registerSingleton<IBcryptProvider>("BcryptProvider", BcryptProvider);

@@ -1,10 +1,11 @@
-import { ICreateUser, IUpdateUser, IUser } from "@modules/users/dto/users";
+import { ICreateUser, IUpdateUser, IUser } from "@modules/users/dtos/users";
 
 interface IUsersRepositories {
   create(user: ICreateUser): Promise<IUser>;
   listByEmail(email: string): Promise<IUser | null>;
   listById(id: string): Promise<IUser | null>;
-  updadte(data: IUpdateUser): Promise<void>;
+  update(data: IUpdateUser): Promise<void>;
+  inactivate(id: string, status: boolean): Promise<void>;
 }
 
 export { IUsersRepositories };

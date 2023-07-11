@@ -7,6 +7,7 @@ interface IUser {
   password: string;
   avatar_url: string | null;
   created_at: Date;
+  active: boolean;
 }
 
 interface IRequestCreateUser {

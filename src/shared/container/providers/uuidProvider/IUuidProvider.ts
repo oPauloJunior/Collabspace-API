@@ -1,6 +1,6 @@
 interface IUuidProvider {
   createUUID(): string;
-  validateUUID(uuid: string): Boolean;
+  validateUUID(uuid: string): boolean;
 }
 
 export { IUuidProvider };

@@ -1,4 +1,5 @@
 import { v4 as uuidV4, validate } from "uuid";
+
 import { IUuidProvider } from "../IUuidProvider";
 
 class UuidProvider implements IUuidProvider {
@@ -6,7 +7,7 @@ class UuidProvider implements IUuidProvider {
     return uuidV4();
   }
 
-  validateUUID(uuid: string): Boolean {
+  validateUUID(uuid: string): boolean {
     return validate(uuid);
   }
 }

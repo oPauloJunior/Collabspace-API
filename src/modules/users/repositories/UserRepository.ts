@@ -1,6 +1,6 @@
 import { prisma } from "@libs/prismaClient";
 
-import { ICreateUser, IUpdateUser, IUser } from "@modules/users/dto/users";
+import { ICreateUser, IUpdateUser, IUser } from "@modules/users/dtos/users";
 import { IUsersRepositories } from "@modules/users/iRepositories/iUsersRepositories";
 
 class UserRepository implements IUsersRepositories {
@@ -38,12 +38,7 @@ class UserRepository implements IUsersRepositories {
     });
   }
 
-  async updadte({
-    id,
-    name,
-    telephone,
-    birthDate,
-  }: IUpdateUser): Promise<void> {
+  async update({ id, name, telephone, birthDate }: IUpdateUser): Promise<void> {
     await prisma.users.update({
       where: { id },
       data: {
@@ -51,6 +46,13 @@ class UserRepository implements IUsersRepositories {
         telephone,
         birth_date: birthDate,
       },
+    });
+  }
+
+  async inactivate(id: string, status: boolean): Promise<void> {
+    await prisma.users.update({
+      where: { id },
+      data: { active: status },
     });
   }
 }

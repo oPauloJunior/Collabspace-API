@@ -1,6 +1,5 @@
 import { inject, injectable } from "tsyringe";
-
-import { IRequestCreateUser } from "@modules/users/dto/users";
+import { IRequestCreateUser } from "@modules/users/dtos/users";
 import { telephoneFormat } from "@utils/formatData";
 import { AppResponse } from "@helpers/responseParser";
 import { AppError } from "@helpers/errorsHandler";
