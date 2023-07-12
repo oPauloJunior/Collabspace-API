@@ -14,16 +14,15 @@ async function authentication(
   response: Response,
   next: NextFunction
 ): Promise<any> {
+  const authHeader = request.headers.authorization;
+
+  if (!authHeader) {
+    throw new AppError({
+      statusCode: 401,
+      message: "O token está faltando!",
+    });
+  }
   try {
-    const authHeader = request.headers.authorization;
-
-    if (!authHeader) {
-      throw new AppError({
-        statusCode: 401,
-        message: "O token está faltando!",
-      });
-    }
-
     const [, token] = authHeader.split(" ");
 
     const { tokenPayload } = verify(
