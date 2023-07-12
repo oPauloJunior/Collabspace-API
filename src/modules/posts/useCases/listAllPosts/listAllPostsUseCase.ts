@@ -20,6 +20,8 @@ class ListAllPostsUseCase {
       Number(limit) || 10
     );
 
+    const total = await this.postRepository.count();
+
     const posts = listAll.map((post) => ({
       id: post.id,
       content: post.content,
@@ -36,6 +38,7 @@ class ListAllPostsUseCase {
     return new AppResponse({
       message: "Posts listados com sucesso!",
       data: {
+        total,
         posts,
       },
     });
