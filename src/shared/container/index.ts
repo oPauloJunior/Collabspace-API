@@ -5,6 +5,8 @@ import { IUsersRepositories } from "@modules/users/iRepositories/iUsersRepositor
 import { UserRepository } from "@modules/users/repositories/UserRepository";
 import { container } from "tsyringe";
 import { PostsRepository } from "@modules/posts/repositories/PostsRepository";
+import { ICommetntRepositories } from "@modules/comments/IRepositories/ICommentsRepositories";
+import { CommentRepository } from "@modules/comments/repositories/commentsRepository";
 
 container.registerSingleton<IUsersRepositories>(
   "UserRepository",
@@ -14,4 +16,9 @@ container.registerSingleton<IUsersRepositories>(
 container.registerSingleton<IPostsRepositories>(
   "PostRepository",
   PostsRepository
+);
+
+container.registerSingleton<ICommetntRepositories>(
+  "CommentRepository",
+  CommentRepository
 );
