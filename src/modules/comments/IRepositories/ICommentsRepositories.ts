@@ -1,9 +1,10 @@
 import { IComment, ICreateComment, IUpdateComment } from "../dtos/comments";
 
-interface ICommentRepositories {
+interface ICommentsRepositories {
   create(comment: ICreateComment): Promise<IComment>;
-  listByID(id: string): Promise<IComment | null>;
+  listById(id: string): Promise<IComment | null>;
   update(data: IUpdateComment): Promise<void>;
+  delete(id: string): Promise<void>;
 }
 
-export { ICommentRepositories };
+export { ICommentsRepositories };

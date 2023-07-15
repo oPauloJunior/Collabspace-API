@@ -1,8 +1,8 @@
 import { prisma } from "@libs/prismaClient";
-import { ICommetntRepositories } from "../IRepositories/ICommentsRepositories";
+import { ICommentsRepositories } from "../IRepositories/ICommentsRepositories";
 import { IComment, ICreateComment, IUpdateComment } from "../dtos/comments";
 
-class CommentRepository implements ICommetntRepositories {
+class CommentRepository implements ICommentsRepositories {
   create({ id, postId, userId, content }: ICreateComment): Promise<IComment> {
     return prisma.comments.create({
       data: {
@@ -14,7 +14,7 @@ class CommentRepository implements ICommetntRepositories {
     });
   }
 
-  listByID(id: string): Promise<IComment | null> {
+  listById(id: string): Promise<IComment | null> {
     return prisma.comments.findFirst({
       where: { id },
     });
@@ -26,6 +26,12 @@ class CommentRepository implements ICommetntRepositories {
       data: {
         content,
       },
+    });
+  }
+
+  async delete(id: string): Promise<void> {
+    await prisma.comments.delete({
+      where: { id },
     });
   }
 }

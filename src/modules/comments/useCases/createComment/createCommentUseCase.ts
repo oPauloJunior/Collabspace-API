@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
-import { ICommetntRepositories } from "../IRepositories/ICommentsRepositories";
+import { ICommentRepositories } from "../../IRepositories/ICommentsRepositories";
 import { IPostsRepositories } from "@modules/posts/iRepositories/iPostsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { IRequestCreateComment } from "../dtos/comments";
+import { IRequestCreateComment } from "../../dtos/comments";
 import { AppResponse } from "@helpers/responseParser";
 import { AppError } from "@helpers/errorsHandler";
 
@@ -15,7 +15,7 @@ interface IRequest extends IRequestCreateComment {
 class CreateCommentUseCase {
   constructor(
     @inject("CommentRepository")
-    private commentRepository: ICommetntRepositories,
+    private commentRepository: ICommentRepositories,
     @inject("PostRepository")
     private postRepository: IPostsRepositories,
     @inject("UuidProvider")

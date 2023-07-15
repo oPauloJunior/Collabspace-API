@@ -1,10 +1,10 @@
 import { inject, injectable } from "tsyringe";
 
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { IRequestUpdateComment } from "../dtos/comments";
+import { IRequestUpdateComment } from "../../dtos/comments";
 import { AppResponse } from "@helpers/responseParser";
 import { AppError } from "@helpers/errorsHandler";
-import { ICommentRepositories } from "../IRepositories/ICommentsRepositories";
+import { ICommentRepositories } from "../../IRepositories/ICommentsRepositories";
 
 interface IRequest extends IRequestUpdateComment {
   id: string;

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { UpdateCommentUseCase } from "./updateCommentUseCase";
-import { IRequestUpdateComment } from "../dtos/comments";
+import { IRequestUpdateComment } from "../../dtos/comments";
 
 class UpdateCommentController {
   async handle(req: Request, res: Response) {
