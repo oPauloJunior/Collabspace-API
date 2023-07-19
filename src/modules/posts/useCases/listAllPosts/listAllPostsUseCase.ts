@@ -1,5 +1,5 @@
 import { AppResponse } from "@helpers/responseParser";
-import { IPostsRepositories } from "@modules/posts/iRepositories/iPostsRepositories";
+import { IPostsRepositories } from "@modules/posts/iRepositories/IPostsRepositories";
 import { inject, injectable } from "tsyringe";
 
 interface IRequest {
@@ -14,7 +14,7 @@ class ListAllPostsUseCase {
     private postRepository: IPostsRepositories
   ) {}
 
-  async execute({ page, limit }: IRequest): Promise<AppResponse> {
+  async excute({ page, limit }: IRequest): Promise<AppResponse> {
     const listAll = await this.postRepository.listAll(
       Number(page) || 0,
       Number(limit) || 10
@@ -23,16 +23,54 @@ class ListAllPostsUseCase {
     const total = await this.postRepository.count();
 
     const posts = listAll.map((post) => {
-      const comments = post.comments.map((comment) => ({
-        id: comment.id,
-        content: comment.content,
-        commentedAt: comment.commented_at,
-        user: {
-          id: comment.users.id,
-          name: comment.users.name,
-          avatarUrl: comment.users.avatar_url,
-        },
-      }));
+      const comments = post.comments.map((comment) => {
+        const reactions = comment.reactions.map((reaction) => {
+          const { users } = reaction;
+
+          return {
+            id: reaction.id,
+            entityType: reaction.entity_type,
+            reactedAt: reaction.reacted_at,
+            user: {
+              id: users.id,
+              name: users.name,
+              avatarUrl: users.avatar_url,
+            },
+          };
+        });
+
+        const { users } = comment;
+
+        return {
+          id: comment.id,
+          content: comment.content,
+          commentedAt: comment.commented_at,
+          user: {
+            id: users.id,
+            name: users.name,
+            avatarUrl: users.avatar_url,
+          },
+          reactions,
+        };
+      });
+
+      const reactions = post.reactions.map((reaction) => {
+        const { users } = reaction;
+
+        return {
+          id: reaction.id,
+          entityType: reaction.entity_type,
+          reactedAt: reaction.reacted_at,
+          user: {
+            id: users.id,
+            name: users.name,
+            avatarUrl: users.avatar_url,
+          },
+        };
+      });
+
+      const { users } = post;
+
       return {
         id: post.id,
         content: post.content,
@@ -40,11 +78,12 @@ class ListAllPostsUseCase {
         visibility: post.visibility,
         publishedAt: post.published_at,
         user: {
-          id: post.users.id,
-          name: post.users.name,
-          avatarUrl: post.users.avatar_url,
+          id: users.id,
+          name: users.name,
+          avatarUrl: users.avatar_url,
         },
         comments,
+        reactions,
       };
     });
 

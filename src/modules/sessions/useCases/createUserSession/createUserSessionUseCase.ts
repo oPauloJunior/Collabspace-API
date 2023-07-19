@@ -1,10 +1,10 @@
+import { inject, injectable } from "tsyringe";
 import { sign } from "jsonwebtoken";
-import { AppError } from "@helpers/errorsHandler";
 import { AppResponse } from "@helpers/responseParser";
 import { IRequestCreateUserSession } from "@modules/sessions/dtos/sessions";
-import { IUsersRepositories } from "@modules/users/iRepositories/iUsersRepositories";
+import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
+import { AppError } from "@helpers/errorsHandler";
 import { IBcryptProvider } from "@shared/container/providers/bcryptProvider/IBcryptProvider";
-import { inject, injectable } from "tsyringe";
 
 @injectable()
 class CreateUserSessionUseCase {

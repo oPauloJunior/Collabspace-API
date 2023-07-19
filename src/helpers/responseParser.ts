@@ -12,7 +12,7 @@ class AppResponse {
 
   constructor({ statusCode = 200, message, data }: IAppResponse) {
     this.statusCode = statusCode;
-    this.result = "Sucess";
+    this.result = "success";
     this.message = message;
     this.data = data;
   }

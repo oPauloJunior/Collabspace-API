@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
-import { ICommentRepositories } from "../../IRepositories/ICommentsRepositories";
-import { IPostsRepositories } from "@modules/posts/iRepositories/iPostsRepositories";
+import { IRequestCreateComment } from "@modules/comments/dtos/comments";
+import { ICommentsRepositories } from "@modules/comments/iRepositories/ICommentsRepositories";
+import { IPostsRepositories } from "@modules/posts/iRepositories/IPostsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { IRequestCreateComment } from "../../dtos/comments";
 import { AppResponse } from "@helpers/responseParser";
 import { AppError } from "@helpers/errorsHandler";
 
@@ -15,7 +15,7 @@ interface IRequest extends IRequestCreateComment {
 class CreateCommentUseCase {
   constructor(
     @inject("CommentRepository")
-    private commentRepository: ICommentRepositories,
+    private commentRepository: ICommentsRepositories,
     @inject("PostRepository")
     private postRepository: IPostsRepositories,
     @inject("UuidProvider")
@@ -25,7 +25,7 @@ class CreateCommentUseCase {
   async execute({ postId, usrId, content }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(postId)) {
       throw new AppError({
-        message: "Id é invalido!",
+        message: "ID é inválido!",
       });
     }
 

@@ -1,14 +1,14 @@
 import { AppError } from "@helpers/errorsHandler";
 import { AppResponse } from "@helpers/responseParser";
-import { ICommentsRepositories } from "@modules/comments/IRepositories/ICommentsRepositories";
-import { IPostsRepositories } from "@modules/posts/iRepositories/iPostsRepositories";
-import { UuidProvider } from "@shared/container/providers/uuidProvider/implementation/UuidProvider";
+import { ICommentsRepositories } from "@modules/comments/iRepositories/ICommentsRepositories";
+import { IPostsRepositories } from "@modules/posts/iRepositories/IPostsRepositories";
+import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { inject, injectable } from "tsyringe";
 
 interface IRequest {
   usrId: string;
-  id: string;
   postId: string;
+  id: string;
 }
 
 @injectable()
@@ -19,27 +19,19 @@ class DeleteCommentUseCase {
     @inject("PostRepository")
     private postRepository: IPostsRepositories,
     @inject("UuidProvider")
-    private uuidProvider: UuidProvider
+    private uuidProvider: IUuidProvider
   ) {}
 
   async execute({ usrId, postId, id }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(id)) {
       throw new AppError({
-        message: "CommentID é invalido!",
+        message: "CommentID é inválido!",
       });
     }
 
     if (!this.uuidProvider.validateUUID(postId)) {
       throw new AppError({
-        message: "PostID é invalido!",
-      });
-    }
-
-    const listPostById = await this.postRepository.listById(postId);
-
-    if (!listPostById) {
-      throw new AppError({
-        message: "Post não encontrado!",
+        message: "PostID é inválido!",
       });
     }
 
@@ -48,6 +40,14 @@ class DeleteCommentUseCase {
     if (!listCommentById) {
       throw new AppError({
         message: "Comentário não encontrado!",
+      });
+    }
+
+    const listPostById = await this.postRepository.listById(postId);
+
+    if (!listPostById) {
+      throw new AppError({
+        message: "Post não encontrado!",
       });
     }
 

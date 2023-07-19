@@ -1,7 +1,7 @@
-import { UpdateCommentController } from "@modules/comments/useCases/updateComment/updateCommentController";
-import { CreateCommentController } from "@modules/comments/useCases/createComment/createCommentController";
 import { Router } from "express";
 import { authentication } from "src/middlewares/authentication";
+import { CreateCommentController } from "@modules/comments/useCases/createComment/createCommentController";
+import { UpdateCommentController } from "@modules/comments/useCases/updateComment/updateCommentController";
 import { DeleteCommentController } from "@modules/comments/useCases/deleteComment/deleteCommentController";
 
 const commentRoutes = Router();

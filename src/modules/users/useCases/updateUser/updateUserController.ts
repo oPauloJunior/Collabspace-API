@@ -4,9 +4,9 @@ import { container } from "tsyringe";
 import { UpdateUserUseCase } from "./updateUserUseCase";
 
 class UpdateUserController {
-  async handle(req: Request, res: Response) {
-    const id = req.usrId;
-    const { name, telephone, birthDate } = req.body as IRequestUpdateUser;
+  async handle(request: Request, response: Response) {
+    const id = request.usrId;
+    const { name, telephone, birthDate } = request.body as IRequestUpdateUser;
 
     const updateUseCase = container.resolve(UpdateUserUseCase);
 
@@ -17,7 +17,7 @@ class UpdateUserController {
       birthDate,
     });
 
-    return res.status(result.statusCode).json(result);
+    return response.status(result.statusCode).json(result);
   }
 }
 

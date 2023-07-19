@@ -3,9 +3,9 @@ import { container } from "tsyringe";
 import { DeletePostUseCase } from "./deletePostUseCase";
 
 class DeletePostController {
-  async handle(req: Request, res: Response) {
-    const { usrId } = req;
-    const { id } = req.params as { id: string };
+  async handle(request: Request, response: Response) {
+    const { usrId } = request;
+    const { id } = request.params as { id: string };
 
     const deletePostUseCase = container.resolve(DeletePostUseCase);
 
@@ -14,7 +14,7 @@ class DeletePostController {
       id,
     });
 
-    return res.status(result.statusCode).json(result);
+    return response.status(result.statusCode).json(result);
   }
 }
 

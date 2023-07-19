@@ -1,11 +1,11 @@
-import { IRequestCreateUserSession } from "@modules/sessions/dtos/sessions";
 import { Request, Response } from "express";
+import { IRequestCreateUserSession } from "@modules/sessions/dtos/sessions";
 import { container } from "tsyringe";
 import { CreateUserSessionUseCase } from "./createUserSessionUseCase";
 
 class CreateUserSessionController {
-  async handle(req: Request, res: Response) {
-    const { email, password } = req.body as IRequestCreateUserSession;
+  async handle(request: Request, response: Response) {
+    const { email, password } = request.body as IRequestCreateUserSession;
 
     const createUserSessionUseCase = container.resolve(
       CreateUserSessionUseCase
@@ -16,7 +16,7 @@ class CreateUserSessionController {
       password,
     });
 
-    return res.status(result.statusCode).json(result);
+    return response.status(result.statusCode).json(result);
   }
 }
 

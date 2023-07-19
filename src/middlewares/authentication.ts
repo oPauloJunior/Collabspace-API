@@ -22,6 +22,7 @@ async function authentication(
       message: "O token está faltando!",
     });
   }
+
   try {
     const [, token] = authHeader.split(" ");
 

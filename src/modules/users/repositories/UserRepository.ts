@@ -1,7 +1,7 @@
 import { prisma } from "@libs/prismaClient";
 
 import { ICreateUser, IUpdateUser, IUser } from "@modules/users/dtos/users";
-import { IUsersRepositories } from "@modules/users/iRepositories/iUsersRepositories";
+import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
 
 class UserRepository implements IUsersRepositories {
   create({

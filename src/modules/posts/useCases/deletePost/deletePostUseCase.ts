@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
-import { IPostsRepositories } from "@modules/posts/iRepositories/iPostsRepositories";
-import { UuidProvider } from "@shared/container/providers/uuidProvider/implementation/UuidProvider";
+import { IPostsRepositories } from "@modules/posts/iRepositories/IPostsRepositories";
+import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { AppResponse } from "@helpers/responseParser";
 import { AppError } from "@helpers/errorsHandler";
 
@@ -15,15 +15,16 @@ class DeletePostUseCase {
     @inject("PostRepository")
     private postRepository: IPostsRepositories,
     @inject("UuidProvider")
-    private uuidProvider: UuidProvider
+    private uuidProvider: IUuidProvider
   ) {}
 
   async execute({ usrId, id }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(id)) {
       throw new AppError({
-        message: "ID é invalido!",
+        message: "ID é inválido!",
       });
     }
+
     const listById = await this.postRepository.listById(id);
 
     if (!listById) {
@@ -35,7 +36,7 @@ class DeletePostUseCase {
     if (usrId !== listById.user_id) {
       throw new AppError({
         statusCode: 401,
-        message: "Operação não autorizada!",
+        message: "Operação não permitida!",
       });
     }
 

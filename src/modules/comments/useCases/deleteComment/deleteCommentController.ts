@@ -3,9 +3,9 @@ import { container } from "tsyringe";
 import { DeleteCommentUseCase } from "./deleteCommentUseCase";
 
 class DeleteCommentController {
-  async handle(req: Request, res: Response) {
-    const { usrId } = req;
-    const { id, postId } = req.params as { id: string; postId: string };
+  async handle(request: Request, response: Response) {
+    const { usrId } = request;
+    const { id, postId } = request.params as { id: string; postId: string };
 
     const deleteCommentUseCase = container.resolve(DeleteCommentUseCase);
 
@@ -15,7 +15,7 @@ class DeleteCommentController {
       id,
     });
 
-    return res.status(result.statusCode).json(result);
+    return response.status(result.statusCode).json(result);
   }
 }
 

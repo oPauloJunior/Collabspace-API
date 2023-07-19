@@ -1,10 +1,9 @@
 import { inject, injectable } from "tsyringe";
-
+import { ICommentsRepositories } from "@modules/comments/iRepositories/ICommentsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { IRequestUpdateComment } from "../../dtos/comments";
+import { IRequestUpdateComment } from "@modules/comments/dtos/comments";
 import { AppResponse } from "@helpers/responseParser";
 import { AppError } from "@helpers/errorsHandler";
-import { ICommentRepositories } from "../../IRepositories/ICommentsRepositories";
 
 interface IRequest extends IRequestUpdateComment {
   id: string;
@@ -15,7 +14,7 @@ interface IRequest extends IRequestUpdateComment {
 class UpdateCommentUseCase {
   constructor(
     @inject("CommentRepository")
-    private commentRepository: ICommentRepositories,
+    private commentRepository: ICommentsRepositories,
     @inject("UuidProvider")
     private uuidProvider: IUuidProvider
   ) {}
@@ -27,7 +26,7 @@ class UpdateCommentUseCase {
       });
     }
 
-    const listCommentById = await this.commentRepository.listByID(id);
+    const listCommentById = await this.commentRepository.listById(id);
 
     if (!listCommentById) {
       throw new AppError({

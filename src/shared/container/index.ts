@@ -1,12 +1,14 @@
-import { IPostsRepositories } from "@modules/posts/iRepositories/iPostsRepositories";
 import "./providers";
-
-import { IUsersRepositories } from "@modules/users/iRepositories/iUsersRepositories";
-import { UserRepository } from "@modules/users/repositories/UserRepository";
 import { container } from "tsyringe";
-import { PostsRepository } from "@modules/posts/repositories/PostsRepository";
-import { ICommetntRepositories } from "@modules/comments/IRepositories/ICommentsRepositories";
-import { CommentRepository } from "@modules/comments/repositories/commentsRepository";
+
+import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
+import { UserRepository } from "@modules/users/repositories/UserRepository";
+import { IPostsRepositories } from "@modules/posts/iRepositories/IPostsRepositories";
+import { PostRepository } from "@modules/posts/repositories/PostRepository";
+import { ICommentsRepositories } from "@modules/comments/iRepositories/ICommentsRepositories";
+import { CommentRepository } from "@modules/comments/repositories/CommentRepository";
+import { IReactionsRepositories } from "@modules/reactions/iRepositories/IReactionsRepositories";
+import { ReactionRepository } from "@modules/reactions/repositories/ReactionRepository";
 
 container.registerSingleton<IUsersRepositories>(
   "UserRepository",
@@ -15,10 +17,15 @@ container.registerSingleton<IUsersRepositories>(
 
 container.registerSingleton<IPostsRepositories>(
   "PostRepository",
-  PostsRepository
+  PostRepository
 );
 
-container.registerSingleton<ICommetntRepositories>(
+container.registerSingleton<ICommentsRepositories>(
   "CommentRepository",
   CommentRepository
+);
+
+container.registerSingleton<IReactionsRepositories>(
+  "ReactionRepository",
+  ReactionRepository
 );

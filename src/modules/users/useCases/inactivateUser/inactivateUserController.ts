@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
 import { container } from "tsyringe";
+import { Request, Response } from "express";
 import { InactivateUserUseCase } from "./inactivateUserUseCase";
 
 class InactivateUserController {
-  async handle(req: Request, res: Response) {
-    const id = req.usrId;
+  async handle(request: Request, response: Response) {
+    const id = request.usrId;
 
     const inactivateUserUseCase = container.resolve(InactivateUserUseCase);
 
@@ -12,7 +12,7 @@ class InactivateUserController {
       id,
     });
 
-    return res.status(result.statusCode).json(result);
+    return response.status(result.statusCode).json(result);
   }
 }
 

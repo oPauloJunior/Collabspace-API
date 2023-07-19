@@ -1,9 +1,10 @@
 import { inject, injectable } from "tsyringe";
+
 import { IRequestCreateUser } from "@modules/users/dtos/users";
 import { telephoneFormat } from "@utils/formatData";
 import { AppResponse } from "@helpers/responseParser";
 import { AppError } from "@helpers/errorsHandler";
-import { IUsersRepositories } from "@modules/users/iRepositories/iUsersRepositories";
+import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { IBcryptProvider } from "@shared/container/providers/bcryptProvider/IBcryptProvider";
 
@@ -39,7 +40,7 @@ class CreateUserUseCase {
       )
     ) {
       throw new AppError({
-        message: "Senha Fraca!",
+        message: "Senha fraca!",
       });
     }
 
@@ -53,7 +54,7 @@ class CreateUserUseCase {
 
     if (listUserByEmail) {
       throw new AppError({
-        message: "Usúario já cadastrado!",
+        message: "Usuário já cadastrado!",
       });
     }
 

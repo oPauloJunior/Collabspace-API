@@ -1,13 +1,14 @@
-import { IRequestUpdatePost } from "@modules/posts/dtos/posts";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
+import { IRequestUpdatePost } from "@modules/posts/dtos/posts";
 import { UpdatePostUseCase } from "./updatePostUseCase";
 
 class UpdatePostController {
-  async handle(req: Request, res: Response) {
-    const { usrId } = req;
-    const { id } = req.params as { id: string };
-    const { content, tags, visibility } = req.body as IRequestUpdatePost;
+  async handle(request: Request, response: Response) {
+    const { usrId } = request;
+
+    const { id } = request.params as { id: string };
+    const { content, tags, visibility } = request.body as IRequestUpdatePost;
 
     const updatePostUseCase = container.resolve(UpdatePostUseCase);
 
@@ -19,7 +20,7 @@ class UpdatePostController {
       visibility,
     });
 
-    return res.status(result.statusCode).json(result);
+    return response.status(result.statusCode).json(result);
   }
 }
 

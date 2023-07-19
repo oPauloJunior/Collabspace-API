@@ -2,8 +2,8 @@ import { inject, injectable } from "tsyringe";
 
 import { AppResponse } from "@helpers/responseParser";
 import { IRequestUpdateUser } from "@modules/users/dtos/users";
-import { IUsersRepositories } from "@modules/users/iRepositories/iUsersRepositories";
-import { UuidProvider } from "@shared/container/providers/uuidProvider/implementation/UuidProvider";
+import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
+import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { AppError } from "@helpers/errorsHandler";
 import { telephoneFormat } from "@utils/formatData";
 
@@ -17,7 +17,7 @@ class UpdateUserUseCase {
     @inject("UserRepository")
     private userRepository: IUsersRepositories,
     @inject("UuidProvider")
-    private uuidProvider: UuidProvider
+    private uuidProvider: IUuidProvider
   ) {}
 
   async execute({
@@ -28,7 +28,7 @@ class UpdateUserUseCase {
   }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(id)) {
       throw new AppError({
-        message: "ID é invalido!",
+        message: "ID é inválido!",
       });
     }
 

@@ -1,8 +1,9 @@
-import { AppError } from "@helpers/errorsHandler";
-import { AppResponse } from "@helpers/responseParser";
-import { IUsersRepositories } from "@modules/users/iRepositories/iUsersRepositories";
-import { UuidProvider } from "@shared/container/providers/uuidProvider/implementation/UuidProvider";
 import { inject, injectable } from "tsyringe";
+
+import { AppResponse } from "@helpers/responseParser";
+import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
+import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
+import { AppError } from "@helpers/errorsHandler";
 
 interface IRequest {
   id: string;
@@ -14,7 +15,7 @@ class InactivateUserUseCase {
     @inject("UserRepository")
     private userRepository: IUsersRepositories,
     @inject("UuidProvider")
-    private uuidProvider: UuidProvider
+    private uuidProvider: IUuidProvider
   ) {}
 
   async execute({ id }: IRequest): Promise<AppResponse> {

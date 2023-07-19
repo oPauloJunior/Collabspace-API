@@ -4,9 +4,9 @@ import { container } from "tsyringe";
 import { CreatePostUseCase } from "./createPostUseCase";
 
 class CreatePostController {
-  async handle(req: Request, res: Response) {
-    const userId = req.usrId;
-    const { content, tags, visibility } = req.body as IRequestCreatePost;
+  async handle(request: Request, response: Response) {
+    const userId = request.usrId;
+    const { content, tags, visibility } = request.body as IRequestCreatePost;
 
     const createPostUseCase = container.resolve(CreatePostUseCase);
 
@@ -17,7 +17,7 @@ class CreatePostController {
       visibility,
     });
 
-    return res.status(result.statusCode).json(result);
+    return response.status(result.statusCode).json(result);
   }
 }
 

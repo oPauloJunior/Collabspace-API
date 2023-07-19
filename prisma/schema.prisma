@@ -13,6 +13,7 @@ model comments {
   user_id      String   @db.Uuid
   content      String   @db.VarChar
   commented_at DateTime @default(now()) @db.Timestamp(6)
+  reactions    reactions[]
   posts        posts    @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   users        users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
@@ -33,19 +34,23 @@ model posts {
   user_id      String     @db.Uuid
   content      String     @db.VarChar
   tags         String?    @db.VarChar
-  visibility   Int       @default(0) @db.SmallInt
+  visibility   Int        @default(0) @db.SmallInt
   published_at DateTime   @default(now()) @db.Timestamp(6)
   comments     comments[]
+  reactions    reactions[]
   users        users      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model reactions {
-  id          String   @id @db.Uuid
-  user_id     String   @db.Uuid
-  entity_id   String   @db.Uuid
-  entity_type Int      @db.SmallInt
-  reacted_at  DateTime @default(now()) @db.Timestamp(6)
-  users       users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id          String    @id @db.Uuid
+  user_id     String    @db.Uuid
+  post_id     String?   @db.Uuid
+  comment_id  String?   @db.Uuid
+  entity_type Int       @db.SmallInt
+  reacted_at  DateTime  @default(now()) @db.Timestamp(6)
+  users       users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  posts       posts?    @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  comments    comments? @relation(fields: [comment_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model users {
@@ -56,7 +61,7 @@ model users {
   birth_date                       String      @db.VarChar
   password                         String      @db.VarChar
   avatar_url                       String?     @db.VarChar
-  active                           Boolean    @default(true)
+  active                           Boolean     @default(true)
   created_at                       DateTime    @default(now()) @db.Timestamp(6)
   comments                         comments[]
   friends_friends_user_id_1Tousers friends[]   @relation("friends_user_id_1Tousers")

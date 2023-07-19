@@ -28,8 +28,8 @@ interface IUpdateComment {
 
 export {
   IComment,
-  ICreateComment,
   IRequestCreateComment,
+  ICreateComment,
   IRequestUpdateComment,
   IUpdateComment,
 };

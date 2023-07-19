@@ -1,11 +1,11 @@
-import { AppError } from "@helpers/errorsHandler";
-import { AppResponse } from "@helpers/responseParser";
-import { IRequestCreatePost } from "@modules/posts/dtos/posts";
-import { IPostsRepositories } from "@modules/posts/iRepositories/iPostsRepositories";
-import { UuidProvider } from "@shared/container/providers/uuidProvider/implementation/UuidProvider";
 import { inject, injectable } from "tsyringe";
+import { IPostsRepositories } from "@modules/posts/iRepositories/IPostsRepositories";
+import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
+import { IRequestUpdatePost } from "@modules/posts/dtos/posts";
+import { AppResponse } from "@helpers/responseParser";
+import { AppError } from "@helpers/errorsHandler";
 
-interface IRequest extends IRequestCreatePost {
+interface IRequest extends IRequestUpdatePost {
   usrId: string;
   id: string;
 }
@@ -16,7 +16,7 @@ class UpdatePostUseCase {
     @inject("PostRepository")
     private postRepository: IPostsRepositories,
     @inject("UuidProvider")
-    private uuidProvider: UuidProvider
+    private uuidProvider: IUuidProvider
   ) {}
 
   async execute({
@@ -28,7 +28,7 @@ class UpdatePostUseCase {
   }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(id)) {
       throw new AppError({
-        message: "ID é invalido!",
+        message: "ID é inválido!",
       });
     }
 
@@ -43,7 +43,7 @@ class UpdatePostUseCase {
     if (usrId !== listById.user_id) {
       throw new AppError({
         statusCode: 401,
-        message: "Operação não autorizada!",
+        message: "Operação não permitida!",
       });
     }
 

@@ -34,34 +34,41 @@ interface IUpdatePost {
   visibility: number;
 }
 
+interface User {
+  id: string;
+  name: string;
+  avatar_url: string | null;
+}
+
+interface Reaction {
+  id: string;
+  entity_type: number;
+  reacted_at: Date;
+  users: User;
+}
+
 interface IListAllPosts {
   id: string;
   content: string;
   tags: string | null;
   visibility: number;
   published_at: Date;
-  users: {
-    id: string;
-    name: string;
-    avatar_url: string | null;
-  };
+  users: User;
   comments: {
     id: string;
     content: string;
     commented_at: Date;
-    users: {
-      id: string;
-      name: string;
-      avatar_url: string | null;
-    };
+    users: User;
+    reactions: Reaction[];
   }[];
+  reactions: Reaction[];
 }
 
 export {
   IPost,
-  ICreatePost,
   IRequestCreatePost,
-  IListAllPosts,
+  ICreatePost,
   IRequestUpdatePost,
   IUpdatePost,
+  IListAllPosts,
 };
