@@ -43,10 +43,21 @@ interface IUpdateUser {
   birthDate?: string;
 }
 
+interface IRequestUpdateUserAvatar {
+  avatarUrl: string;
+}
+
+interface IUpdateUserAvatar {
+  id: string;
+  avatarUrl: string;
+}
+
 export {
   IUser,
   ICreateUser,
   IRequestCreateUser,
   IRequestUpdateUser,
   IUpdateUser,
+  IRequestUpdateUserAvatar,
+  IUpdateUserAvatar,
 };

@@ -1,6 +1,11 @@
 import { prisma } from "@libs/prismaClient";
 
-import { ICreateUser, IUpdateUser, IUser } from "@modules/users/dtos/users";
+import {
+  ICreateUser,
+  IUpdateUser,
+  IUpdateUserAvatar,
+  IUser,
+} from "@modules/users/dtos/users";
 import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
 
 class UserRepository implements IUsersRepositories {
@@ -45,6 +50,15 @@ class UserRepository implements IUsersRepositories {
         name,
         telephone,
         birth_date: birthDate,
+      },
+    });
+  }
+
+  async updateAvatar({ id, avatarUrl }: IUpdateUserAvatar): Promise<void> {
+    await prisma.users.update({
+      where: { id },
+      data: {
+        avatar_url: avatarUrl,
       },
     });
   }
