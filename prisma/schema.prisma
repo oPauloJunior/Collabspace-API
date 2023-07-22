@@ -22,7 +22,7 @@ model friends {
   id                             String   @id @db.Uuid
   user_id_1                      String   @db.Uuid
   user_id_2                      String   @db.Uuid
-  action_id_1                    Int?     @db.SmallInt
+  action_id_1                    Int      @default(1) @db.SmallInt
   action_id_2                    Int?     @db.SmallInt
   created_at                     DateTime @default(now()) @db.Timestamp(6)
   users_friends_user_id_1Tousers users    @relation("friends_user_id_1Tousers", fields: [user_id_1], references: [id], onDelete: NoAction, onUpdate: NoAction)
