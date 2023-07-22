@@ -65,6 +65,7 @@ class CreateFriendUseCase {
         await this.friendRepository.updateActionStatus({
           id: ListFriendshipAlreadyExists.id,
           actionId1: EnumFriendActions.requested,
+          actionId2: null,
         });
 
         return new AppResponse({
