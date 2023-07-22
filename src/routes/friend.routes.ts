@@ -7,5 +7,6 @@ const friendRoutes = Router();
 friendRoutes.use(authentication);
 
 friendRoutes.post("/:targetId", new CreateFriendController().handle);
+friendRoutes.patch("/cancelRequest/:id", new CreateFriendController().handle);
 
 export { friendRoutes };

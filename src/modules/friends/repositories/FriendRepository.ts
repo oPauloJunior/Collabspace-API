@@ -13,6 +13,12 @@ class FriendRepository implements IFriendsRepositories {
     });
   }
 
+  listById(id: string): Promise<IFriend | null> {
+    return prisma.friends.findFirst({
+      where: { id },
+    });
+  }
+
   listAlreadyExists(userId1: string, userId2: string): Promise<IFriend | null> {
     return prisma.friends.findFirst({
       where: {
