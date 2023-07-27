@@ -2,7 +2,7 @@ import { AppError } from "@helpers/errorsHandler";
 import { AppResponse } from "@helpers/responseParser";
 import { IReactionsRepositories } from "@modules/reactions/iRepositories/IReactionsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { injectable, inject } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 
 interface IRequest {
   usrId: string;
@@ -25,15 +25,15 @@ class DeleteReactionUseCase {
       });
     }
 
-    const listReactionById = await this.reactionRepository.listById(id);
+    const listById = await this.reactionRepository.listById(id);
 
-    if (!listReactionById) {
+    if (!listById) {
       throw new AppError({
         message: "Reação não encontrada!",
       });
     }
 
-    if (usrId !== listReactionById.user_id) {
+    if (usrId !== listById.user_id) {
       throw new AppError({
         statusCode: 401,
         message: "Operação não permitida!",

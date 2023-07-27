@@ -39,6 +39,8 @@ class ListAllPostsUseCase {
           };
         });
 
+        console.log({ reactions });
+
         const { users } = comment;
 
         return {

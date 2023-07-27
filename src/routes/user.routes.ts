@@ -14,7 +14,7 @@ userRoutes.post("/", new CreateUserController().handle);
 userRoutes.use(authentication);
 
 userRoutes.put("/", new UpdateUserController().handle);
-userRoutes.delete("/", new InactivateUserController().handle);
 userRoutes.patch("/updateAvatar", new UpdateAvatarController().handle);
+userRoutes.delete("/", new InactivateUserController().handle);
 
 export { userRoutes };

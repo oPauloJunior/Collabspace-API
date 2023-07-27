@@ -3,7 +3,7 @@ import { AppResponse } from "@helpers/responseParser";
 import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
 import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { EnumFriendActions } from "src/enums/friendAction";
+import { EnumFriendActions } from "src/enums/friendActions";
 import { inject, injectable } from "tsyringe";
 
 interface IRequest {
@@ -31,7 +31,7 @@ class CreateFriendUseCase {
 
     if (usrId === targetId) {
       throw new AppError({
-        message: "Não é possível solicitar uma amizade para você mesmo!",
+        message: "Não é possível enviar uma solicitação para você mesmo!",
       });
     }
 
@@ -43,14 +43,14 @@ class CreateFriendUseCase {
       });
     }
 
-    const ListFriendshipAlreadyExists =
+    const listFriendshipAlreadyExists =
       await this.friendRepository.listAlreadyExists(usrId, targetId);
 
-    if (ListFriendshipAlreadyExists) {
+    if (listFriendshipAlreadyExists) {
       if (
-        ListFriendshipAlreadyExists.action_id_1 ===
+        listFriendshipAlreadyExists.action_id_1 ===
           EnumFriendActions.requested &&
-        !ListFriendshipAlreadyExists.action_id_2
+        !listFriendshipAlreadyExists.action_id_2
       ) {
         throw new AppError({
           message: "Solicitação já enviada!",
@@ -58,26 +58,26 @@ class CreateFriendUseCase {
       }
 
       if (
-        ListFriendshipAlreadyExists.action_id_1 ===
+        listFriendshipAlreadyExists.action_id_1 ===
           EnumFriendActions.canceled ||
-        ListFriendshipAlreadyExists.action_id_2 === EnumFriendActions.refused
+        listFriendshipAlreadyExists.action_id_2 === EnumFriendActions.refused
       ) {
         await this.friendRepository.updateActionStatus({
-          id: ListFriendshipAlreadyExists.id,
+          id: listFriendshipAlreadyExists.id,
           actionId1: EnumFriendActions.requested,
           actionId2: null,
         });
 
         return new AppResponse({
-          message: "Solicitação enviada com suceso!",
+          message: "Solicitação enviada com sucesso!",
         });
       }
 
       if (
-        ListFriendshipAlreadyExists.action_id_2 === EnumFriendActions.acepted
+        listFriendshipAlreadyExists.action_id_2 === EnumFriendActions.accepted
       ) {
         throw new AppError({
-          message: "A solicitação já foi aceita!",
+          message: "Solicitação já foi aceita!",
         });
       }
     }
@@ -90,7 +90,7 @@ class CreateFriendUseCase {
 
     return new AppResponse({
       statusCode: 201,
-      message: "Solicitação criada com sucesso!",
+      message: "Solicitação enviada com sucesso!",
       data: {
         id: createFriend.id,
         userId1: createFriend.user_id_1,

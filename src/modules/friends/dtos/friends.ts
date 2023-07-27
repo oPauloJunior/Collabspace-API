@@ -19,4 +19,29 @@ interface IUpdateActionStatus {
   actionId2?: number | null;
 }
 
-export { IFriend, ICreateFriend, IUpdateActionStatus };
+interface User {
+  id: string;
+  name: string;
+  avatar_url: string | null;
+}
+
+interface IListAllFriendsByUser {
+  id: string;
+  users_friends_user_id_1Tousers: User;
+  users_friends_user_id_2Tousers: User;
+  created_at: Date;
+}
+
+interface IListAllRequestsByUser {
+  id: string;
+  users_friends_user_id_1Tousers: User;
+  created_at: Date;
+}
+
+export {
+  IFriend,
+  ICreateFriend,
+  IUpdateActionStatus,
+  IListAllFriendsByUser,
+  IListAllRequestsByUser,
+};

@@ -2,7 +2,7 @@ import { AppError } from "@helpers/errorsHandler";
 import { AppResponse } from "@helpers/responseParser";
 import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { EnumFriendActions } from "src/enums/friendAction";
+import { EnumFriendActions } from "src/enums/friendActions";
 import { inject, injectable } from "tsyringe";
 
 interface IRequest {
@@ -36,6 +36,7 @@ class RecuseRequestUseCase {
 
     if (usrId !== listFriendByID.user_id_2) {
       throw new AppError({
+        statusCode: 401,
         message: "Operação ão permitida!",
       });
     }

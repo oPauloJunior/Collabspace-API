@@ -15,5 +15,4 @@ router.use("/posts", postRoutes);
 router.use("/comments", commentRoutes);
 router.use("/reactions", reactionRoutes);
 router.use("/friends", friendRoutes);
-
 export { router };
