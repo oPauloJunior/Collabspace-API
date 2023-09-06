@@ -37,6 +37,7 @@ interface IUpdatePost {
 interface User {
   id: string;
   name: string;
+  email: string;
   avatar_url: string | null;
 }
 
@@ -47,6 +48,14 @@ interface Reaction {
   users: User;
 }
 
+interface Comment {
+  id: string;
+  content: string;
+  commented_at: Date;
+  users: User;
+  reactions: Reaction[];
+}
+
 interface IListAllPosts {
   id: string;
   content: string;
@@ -54,13 +63,7 @@ interface IListAllPosts {
   visibility: number;
   published_at: Date;
   users: User;
-  comments: {
-    id: string;
-    content: string;
-    commented_at: Date;
-    users: User;
-    reactions: Reaction[];
-  }[];
+  comments: Comment[];
   reactions: Reaction[];
 }
 
