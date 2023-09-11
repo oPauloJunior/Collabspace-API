@@ -18,12 +18,48 @@ class PostRepository implements IPostsRepositories {
         tags,
         visibility,
       },
+      select: {
+        id: true,
+        user_id: true,
+        content: true,
+        tags: true,
+        visibility: true,
+        published_at: true,
+        users: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            avatar_url: true,
+          },
+        },
+        comments: true,
+        reactions: true,
+      },
     });
   }
 
   listById(id: string): Promise<IPost | null> {
     return prisma.posts.findFirst({
       where: { id },
+      select: {
+        id: true,
+        user_id: true,
+        content: true,
+        tags: true,
+        visibility: true,
+        published_at: true,
+        users: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            avatar_url: true,
+          },
+        },
+        comments: true,
+        reactions: true,
+      },
     });
   }
 

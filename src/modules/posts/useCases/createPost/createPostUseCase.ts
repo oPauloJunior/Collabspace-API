@@ -44,8 +44,18 @@ class CreatePostUseCase {
       data: {
         id: createPost.id,
         userId: createPost.user_id,
+        content: createPost.content,
         tags: createPost.tags,
         visibility: createPost.visibility,
+        publishedAt: createPost.published_at,
+        user: {
+          id: createPost.id,
+          name: createPost.users.name,
+          emai: createPost.users.email,
+          avatarUrl: createPost.users.avatar_url,
+        },
+        comments: [],
+        reactions: [],
       },
     });
   }

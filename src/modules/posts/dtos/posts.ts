@@ -1,3 +1,10 @@
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar_url: string | null;
+}
+
 interface IPost {
   id: string;
   user_id: string;
@@ -5,6 +12,7 @@ interface IPost {
   tags: string | null;
   visibility: number;
   published_at: Date;
+  users: User;
 }
 
 interface IRequestCreatePost {
@@ -32,13 +40,6 @@ interface IUpdatePost {
   content: string;
   tags: string;
   visibility: number;
-}
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  avatar_url: string | null;
 }
 
 interface Reaction {
