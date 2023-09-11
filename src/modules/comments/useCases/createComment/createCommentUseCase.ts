@@ -52,6 +52,14 @@ class CreateCommentUseCase {
         postId: createComment.post_id,
         userId: createComment.user_id,
         content: createComment.content,
+        commentedAt: createComment.commented_at,
+        user: {
+          id: createComment.users.id,
+          name: createComment.users.name,
+          email: createComment.users.email,
+          avatarUrl: createComment.users.avatar_url,
+        },
+        reactions: [],
       },
     });
   }

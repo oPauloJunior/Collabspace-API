@@ -1,9 +1,17 @@
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar_url: string | null;
+}
+
 interface IComment {
   id: string;
   post_id: string;
   user_id: string;
   content: string;
   commented_at: Date;
+  users: User;
 }
 
 interface IRequestCreateComment {

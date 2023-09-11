@@ -11,12 +11,42 @@ class CommentRepository implements ICommentsRepositories {
         user_id: userId,
         content,
       },
+      select: {
+        id: true,
+        post_id: true,
+        user_id: true,
+        content: true,
+        commented_at: true,
+        users: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            avatar_url: true,
+          },
+        },
+      },
     });
   }
 
   listById(id: string): Promise<IComment | null> {
     return prisma.comments.findFirst({
       where: { id },
+      select: {
+        id: true,
+        post_id: true,
+        user_id: true,
+        content: true,
+        commented_at: true,
+        users: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            avatar_url: true,
+          },
+        },
+      },
     });
   }
 
