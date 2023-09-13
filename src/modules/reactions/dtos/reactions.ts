@@ -1,3 +1,10 @@
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar_url: string | null;
+}
+
 interface IReaction {
   id: string;
   user_id: string;
@@ -5,6 +12,7 @@ interface IReaction {
   comment_id: string | null;
   entity_type: number;
   reacted_at: Date;
+  users?: User;
 }
 
 interface IRequestCreateReaction {

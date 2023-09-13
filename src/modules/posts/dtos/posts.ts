@@ -12,7 +12,7 @@ interface IPost {
   tags: string | null;
   visibility: number;
   published_at: Date;
-  users: User;
+  users?: User;
 }
 
 interface IRequestCreatePost {

@@ -49,14 +49,6 @@ class PostRepository implements IPostsRepositories {
         tags: true,
         visibility: true,
         published_at: true,
-        users: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-            avatar_url: true,
-          },
-        },
         comments: true,
         reactions: true,
       },

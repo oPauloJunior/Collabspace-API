@@ -18,6 +18,22 @@ class ReactionRepository implements IReactionsRepositories {
         comment_id: commentId || null,
         entity_type: entityType,
       },
+      select: {
+        id: true,
+        user_id: true,
+        post_id: true,
+        comment_id: true,
+        entity_type: true,
+        reacted_at: true,
+        users: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            avatar_url: true,
+          },
+        },
+      },
     });
   }
 

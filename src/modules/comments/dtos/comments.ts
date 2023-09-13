@@ -11,7 +11,7 @@ interface IComment {
   user_id: string;
   content: string;
   commented_at: Date;
-  users: User;
+  users?: User;
 }
 
 interface IRequestCreateComment {

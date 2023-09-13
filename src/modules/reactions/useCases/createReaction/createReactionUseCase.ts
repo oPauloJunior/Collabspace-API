@@ -103,10 +103,14 @@ class CreateReactionUseCase {
       data: {
         id: createReaction.id,
         userId: createReaction.user_id,
-        postId: createReaction.post_id,
-        commentId: createReaction.comment_id,
         entityType: createReaction.entity_type,
         reactedAt: createReaction.reacted_at,
+        user: {
+          id: createReaction.users?.id,
+          name: createReaction.users?.name,
+          email: createReaction.users?.email,
+          avatar_url: createReaction.users?.avatar_url,
+        },
       },
     });
   }

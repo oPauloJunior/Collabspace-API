@@ -38,14 +38,6 @@ class CommentRepository implements ICommentsRepositories {
         user_id: true,
         content: true,
         commented_at: true,
-        users: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-            avatar_url: true,
-          },
-        },
       },
     });
   }
