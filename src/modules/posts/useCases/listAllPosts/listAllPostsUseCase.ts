@@ -34,7 +34,7 @@ class ListAllPostsUseCase {
             user: {
               id: users.id,
               name: users.name,
-              emial: users.email,
+              email: users.email,
               avatarUrl: users.avatar_url,
             },
           };
