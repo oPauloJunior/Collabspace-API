@@ -6,6 +6,7 @@ interface IUser {
   birth_date: string;
   password: string;
   avatar_url: string | null;
+  cover_url: string | null;
   created_at: Date;
   active: boolean;
 }
@@ -27,7 +28,6 @@ interface ICreateUser {
   telephone?: string | null;
   birthDate: string;
   password: string;
-  avatarUrl?: string;
 }
 
 interface IRequestUpdateUser {
@@ -52,6 +52,15 @@ interface IUpdateUserAvatar {
   avatarUrl: string;
 }
 
+interface IRequestUpdateUserCover {
+  coverUrl: string;
+}
+
+interface IUpdateUserCover {
+  id: string;
+  coverUrl: string;
+}
+
 export {
   IUser,
   ICreateUser,
@@ -60,4 +69,6 @@ export {
   IUpdateUser,
   IRequestUpdateUserAvatar,
   IUpdateUserAvatar,
+  IRequestUpdateUserCover,
+  IUpdateUserCover,
 };

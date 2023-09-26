@@ -33,6 +33,7 @@ class ListUserByIdUseCase {
       telephone: listUserById?.telephone,
       birthDate: listUserById?.birth_date,
       avatarUrl: listUserById?.avatar_url,
+      coverUrl: listUserById?.cover_url,
       createdAt: listUserById?.created_at,
     };
 

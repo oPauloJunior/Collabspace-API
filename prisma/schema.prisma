@@ -61,6 +61,7 @@ model users {
   birth_date                       String      @db.VarChar
   password                         String      @db.VarChar
   avatar_url                       String?     @db.VarChar
+  cover_url                        String?     @db.VarChar
   active                           Boolean     @default(true)
   created_at                       DateTime    @default(now()) @db.Timestamp(6)
   comments                         comments[]

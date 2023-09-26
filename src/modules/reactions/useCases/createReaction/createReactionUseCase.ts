@@ -109,7 +109,7 @@ class CreateReactionUseCase {
           id: createReaction.users?.id,
           name: createReaction.users?.name,
           email: createReaction.users?.email,
-          avatar_url: createReaction.users?.avatar_url,
+          avatarUrl: createReaction.users?.avatar_url,
         },
       },
     });
