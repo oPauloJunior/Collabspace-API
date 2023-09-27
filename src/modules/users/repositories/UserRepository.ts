@@ -42,13 +42,20 @@ class UserRepository implements IUsersRepositories {
     });
   }
 
-  async update({ id, name, telephone, birthDate }: IUpdateUser): Promise<void> {
+  async update({
+    id,
+    name,
+    telephone,
+    birthDate,
+    bio,
+  }: IUpdateUser): Promise<void> {
     await prisma.users.update({
       where: { id },
       data: {
         name,
         telephone,
         birth_date: birthDate,
+        bio,
       },
     });
   }

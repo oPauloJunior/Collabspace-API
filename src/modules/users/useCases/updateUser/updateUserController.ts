@@ -6,7 +6,8 @@ import { UpdateUserUseCase } from "./updateUserUseCase";
 class UpdateUserController {
   async handle(request: Request, response: Response) {
     const id = request.usrId;
-    const { name, telephone, birthDate } = request.body as IRequestUpdateUser;
+    const { name, telephone, birthDate, bio } =
+      request.body as IRequestUpdateUser;
 
     const updateUseCase = container.resolve(UpdateUserUseCase);
 
@@ -15,6 +16,7 @@ class UpdateUserController {
       name,
       telephone,
       birthDate,
+      bio,
     });
 
     return response.status(result.statusCode).json(result);

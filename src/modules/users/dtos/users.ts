@@ -7,6 +7,7 @@ interface IUser {
   password: string;
   avatar_url: string | null;
   cover_url: string | null;
+  bio: string | null;
   created_at: Date;
   active: boolean;
 }
@@ -34,6 +35,7 @@ interface IRequestUpdateUser {
   name: string;
   telephone: string;
   birthDate: string;
+  bio: string;
 }
 
 interface IUpdateUser {
@@ -41,6 +43,7 @@ interface IUpdateUser {
   name?: string;
   telephone?: string | null;
   birthDate?: string;
+  bio?: string | null;
 }
 
 interface IRequestUpdateUserAvatar {

@@ -16,15 +16,16 @@ class UpdateCoverUseCase {
   ) {}
 
   async execute({ usrId, coverUrl }: IRequest): Promise<AppResponse> {
-    if (
-      !coverUrl.match(
-        /https?:\/\/(?:www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?/gi
-      )
-    ) {
-      throw new AppError({
-        message: "URL inválida!",
-      });
-    }
+    if (coverUrl)
+      if (
+        !coverUrl.match(
+          /https?:\/\/(?:www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?/gi
+        )
+      ) {
+        throw new AppError({
+          message: "URL inválida!",
+        });
+      }
 
     await this.userRepository.updateCover({
       id: usrId,

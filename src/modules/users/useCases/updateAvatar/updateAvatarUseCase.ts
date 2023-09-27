@@ -16,15 +16,16 @@ class UpdateAvatarUseCase {
   ) {}
 
   async execute({ usrId, avatarUrl }: IRequest): Promise<AppResponse> {
-    if (
-      !avatarUrl.match(
-        /https?:\/\/(?:www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?/gi
-      )
-    ) {
-      throw new AppError({
-        message: "URL inválida!",
-      });
-    }
+    if (avatarUrl)
+      if (
+        !avatarUrl.match(
+          /https?:\/\/(?:www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?/gi
+        )
+      ) {
+        throw new AppError({
+          message: "URL inválida!",
+        });
+      }
 
     await this.userRepository.updateAvatar({
       id: usrId,
