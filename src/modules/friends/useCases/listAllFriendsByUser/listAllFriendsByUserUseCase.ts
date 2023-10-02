@@ -1,10 +1,11 @@
+import { AppError } from "@helpers/errorsHandler";
 import { AppResponse } from "@helpers/responseParser";
 import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { inject, injectable } from "tsyringe";
 
 interface IRequest {
-  usrId: string;
+  id: string;
 }
 
 @injectable()
@@ -16,9 +17,15 @@ class ListAllFriendsByUserUseCase {
     private uuidProvider: IUuidProvider
   ) {}
 
-  async execute({ usrId }: IRequest): Promise<AppResponse> {
+  async execute({ id }: IRequest): Promise<AppResponse> {
+    if (!this.uuidProvider.validateUUID(id)) {
+      throw new AppError({
+        message: "User ID é inválido!",
+      });
+    }
+
     const listAllFriendsByUser =
-      await this.friendRepository.listAllFriendsByUser(usrId);
+      await this.friendRepository.listAllFriendsByUser(id);
 
     const friends = listAllFriendsByUser.map((friend) => {
       return {
