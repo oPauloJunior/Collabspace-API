@@ -22,7 +22,7 @@ friendRoutes.patch("/acceptRequest/:id", new AcceptRequestController().handle);
 friendRoutes.patch("/recuse/:id", new RecuseRequestController().handle);
 friendRoutes.delete("/deleteFriend/:id", new DeleteFriendController().handle);
 friendRoutes.get(
-  "/listAllRequests",
+  "/listAllRequests/:id",
   new ListAllRequestsByUserController().handle
 );
 
