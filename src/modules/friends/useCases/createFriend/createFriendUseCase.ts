@@ -70,6 +70,14 @@ class CreateFriendUseCase {
 
         return new AppResponse({
           message: "Solicitação enviada com sucesso!",
+          data: {
+            id: listFriendshipAlreadyExists.id,
+            userId1: listFriendshipAlreadyExists.user_id_1,
+            userId2: listFriendshipAlreadyExists.user_id_2,
+            actionId1: listFriendshipAlreadyExists.action_id_1,
+            actionId2: listFriendshipAlreadyExists.action_id_2,
+            createdAt: listFriendshipAlreadyExists.created_at,
+          },
         });
       }
 
