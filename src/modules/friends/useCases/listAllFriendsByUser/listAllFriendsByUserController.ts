@@ -5,6 +5,7 @@ import { container } from "tsyringe";
 
 class ListAllFriendsByUserController {
   async handle(req: Request, res: Response) {
+    const { usrId } = req;
     const { id } = req.params as { id: string };
 
     const listAllFriendsByUserUseCase = container.resolve(
@@ -12,6 +13,7 @@ class ListAllFriendsByUserController {
     );
 
     const result = await listAllFriendsByUserUseCase.execute({
+      usrId,
       id,
     });
 
